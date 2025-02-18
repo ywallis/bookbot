@@ -21,11 +21,30 @@ def count_individual(text: str) -> dict[str, int]:
 
     return output
 
+def report(input_dict: dict[str, int]):
+
+    # for key, val in input_dict.items():
+    #     print(f"The '{key}' character was found {val} times")
+    dict_list = [{'char': key, 'count': val} for key, val in input_dict.items() if key.isalpha()]
+    
+    output_list = sorted(dict_list, reverse=True, key=lambda x: x['count'])
+
+    for item in output_list:
+        print(f"The '{item['char']}' character was found {item['count']} times")
+
+    
+
 def main():
 
-    text = get_text("books/frankenstein.txt")
-    print(count_all(text))
+    print("--- Begin report of books/frankenstein.txt ---")
 
-    print(count_individual(text))
+    text = get_text("books/frankenstein.txt")
+    
+    print(f"{count_all(text)} words found in the document\n")
+
+    chars = count_individual(text)
+    report(chars)
+
+    print("--- End report ---")
 
 main()
