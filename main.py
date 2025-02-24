@@ -1,46 +1,18 @@
 import sys
+from utils import count_all, count_individual, report
 
 def get_text(path: str) -> str:
     with open(path) as f:
         file_contents = f.read()
         return file_contents
 
-def count_all(text: str) -> int:
-
-    return len(text.split())
-
-
-def count_individual(text: str) -> dict[str, int]:
-
-    output: dict[str, int] = {}
-    for char in text:
-        lc_char = char.lower()
-        if lc_char in output:
-            output[lc_char] += 1
-        else:
-            output[lc_char] = 1
-
-    return output
-
-def report(input_dict: dict[str, int]):
-
-    # for key, val in input_dict.items():
-    #     print(f"The '{key}' character was found {val} times")
-    dict_list = [{'char': key, 'count': val} for key, val in input_dict.items() if key.isalpha()]
-    
-    output_list = sorted(dict_list, reverse=True, key=lambda x: x['count'])
-
-    for item in output_list:
-        print(f"The '{item['char']}' character was found {item['count']} times")
-
-    
 
 def main():
 
     if len(sys.argv) != 2:
         print("Usage: python3 main.py <path_to_book>")
         sys.exit(1)
-
+    
     title: str = sys.argv[1]
     text = get_text(title)
     print(f"--- Begin report of {title} ---")
