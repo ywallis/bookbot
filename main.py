@@ -1,3 +1,4 @@
+import sys
 
 def get_text(path: str) -> str:
     with open(path) as f:
@@ -36,9 +37,13 @@ def report(input_dict: dict[str, int]):
 
 def main():
 
-    print("--- Begin report of books/frankenstein.txt ---")
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
-    text = get_text("books/frankenstein.txt")
+    title: str = sys.argv[1]
+    text = get_text(title)
+    print(f"--- Begin report of {title} ---")
     
     print(f"{count_all(text)} words found in the document\n")
 
